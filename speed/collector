@@ -16,12 +16,14 @@ s.results.share()
 
 results_dict = s.results.dict()
 
-relcwd = Path(__file__)
-cwd = relcwd.cwd()
-with open(Path(cwd, "data.csv"), "a") as f:
+relcwd = Path(__file__).parent
+filepath = Path(relcwd, "data.csv") 
+row = [results_dict["timestamp"], 
+       results_dict["download"],
+       results_dict["upload"],
+       results_dict["ping"]]
+print(filepath, row)
+with open(filepath, "a") as f:
     writer = csv.writer(f)
-    writer.writerow([results_dict["timestamp"],
-                     results_dict["download"],
-                     results_dict["upload"],
-                     results_dict["ping"]])
+    writer.writerow(row)
 
